@@ -2,6 +2,7 @@ import Flutter
 import AlarmKit
 
 @available(iOS 26.0, *)
+@MainActor
 class AlarmUpdateStreamHandler: NSObject, FlutterStreamHandler {
     private var streamTask: Task<Void, Never>?
     private var previousAlarms: Set<UUID> = []
@@ -20,9 +21,7 @@ class AlarmUpdateStreamHandler: NSObject, FlutterStreamHandler {
                         eventData["event"] = "add"
                         eventData["alarm"] = alarm.toDictionary()
                         
-                        DispatchQueue.main.async {
-                            events(eventData)
-                        }
+                        events(eventData)
                     }
                 }
                 
@@ -33,9 +32,7 @@ class AlarmUpdateStreamHandler: NSObject, FlutterStreamHandler {
                     eventData["id"] = alarmId.uuidString
                     eventData["event"] = "remove"
                     
-                    DispatchQueue.main.async {
-                        events(eventData)
-                    }
+                    events(eventData)
                 }
                 
                 // Find updated alarms (alarms that exist in both sets but may have changed state)
@@ -47,9 +44,7 @@ class AlarmUpdateStreamHandler: NSObject, FlutterStreamHandler {
                         eventData["event"] = "update"
                         eventData["alarm"] = alarm.toDictionary()
                         
-                        DispatchQueue.main.async {
-                            events(eventData)
-                        }
+                        events(eventData)
                     }
                 }
                 
@@ -64,4 +59,4 @@ class AlarmUpdateStreamHandler: NSObject, FlutterStreamHandler {
         streamTask = nil
         return nil
     }
-} 
+}
