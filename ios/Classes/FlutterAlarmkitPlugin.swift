@@ -5,6 +5,7 @@ import AlarmKit
 import SwiftUI
 
 @available(iOS 26.0, *)
+@MainActor
 public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
   // Store the registrar as a static property
   private static var registrar: FlutterPluginRegistrar?
@@ -88,7 +89,6 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
 
   // MARK: - Authorization
 
-  @MainActor
   private func requestAuthorization(result: @escaping FlutterResult) async {
     do {
       let status = try await AlarmManager.shared.requestAuthorization()
@@ -109,7 +109,6 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
     }
   }
 
-  @MainActor
   private func getAuthorizationState(result: @escaping FlutterResult) async {
     let manager = AlarmManager.shared
     switch manager.authorizationState {
@@ -126,7 +125,6 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
 
   // MARK: - Private Helpers
 
-  @MainActor
   private func ensureAuthorized(result: @escaping FlutterResult) async -> Bool {
     let manager = AlarmManager.shared
     switch manager.authorizationState {
@@ -267,7 +265,6 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
 
   // MARK: - Manage alarms methods
 
-  @MainActor
   private func scheduleOneShotAlarm(
     call: FlutterMethodCall,
     result: @escaping FlutterResult
@@ -321,7 +318,6 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
     }
   }
 
-  @MainActor
   private func setCountdownAlarm(
     call: FlutterMethodCall,
     result: @escaping FlutterResult
@@ -389,7 +385,6 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
     } 
   }
 
-  @MainActor
   private func scheduleRecurrentAlarm(
     call: FlutterMethodCall,
     result: @escaping FlutterResult
@@ -455,7 +450,6 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
     }
   }
 
-  @MainActor
   private func getAlarms(result: @escaping FlutterResult) async {
     let manager = AlarmManager.shared
     do {
@@ -471,7 +465,6 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
     }
   }
 
-  @MainActor
   private func cancelAlarm(
     call: FlutterMethodCall,
     result: @escaping FlutterResult
@@ -491,7 +484,6 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
     }
   }
 
-  @MainActor
   private func countdownAlarm(
     call: FlutterMethodCall,
     result: @escaping FlutterResult
@@ -511,7 +503,6 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
     }
   }
 
-  @MainActor
   private func pauseAlarm(
     call: FlutterMethodCall,
     result: @escaping FlutterResult
@@ -531,7 +522,6 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
     }
   }
 
-  @MainActor
   private func resumeAlarm(
     call: FlutterMethodCall,
     result: @escaping FlutterResult
@@ -552,7 +542,6 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
   }
 
 
-  @MainActor
   private func stopAlarm(
     call: FlutterMethodCall,
     result: @escaping FlutterResult
