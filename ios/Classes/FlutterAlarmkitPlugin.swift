@@ -21,10 +21,9 @@ public class FlutterAlarmkitPlugin: NSObject, FlutterPlugin {
     let instance = FlutterAlarmkitPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
 
-//test if causes crashes
- /*    let eventChannel = FlutterEventChannel(name: "flutter_alarmkit/events", binaryMessenger: registrar.messenger())
+    let eventChannel = FlutterEventChannel(name: "flutter_alarmkit/events", binaryMessenger: registrar.messenger())
     let streamHandler = AlarmUpdateStreamHandler()
-    eventChannel.setStreamHandler(streamHandler) */
+    eventChannel.setStreamHandler(streamHandler)
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
